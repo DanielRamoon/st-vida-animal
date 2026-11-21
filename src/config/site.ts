@@ -23,10 +23,22 @@ export const site = {
 export const navItems = [
   { href: "#inicio", label: "Início" },
   { href: "#servicos", label: "Serviços" },
+  { href: "#marcas", label: "Marcas" },
   { href: "#sobre", label: "Sobre Nós" },
   { href: "#galeria", label: "Galeria" },
   { href: "#dicas", label: "Dicas" },
   { href: "#contato", label: "Contato" },
+] as const;
+
+export const brands = [
+  { name: "Golden", tone: "brand" },
+  { name: "Nature", tone: "navy" },
+  { name: "Premier", tone: "navy" },
+  { name: "Royal Canin", tone: "brand" },
+  { name: "Farmina", tone: "navy" },
+  { name: "Fórmula Natural", tone: "brand" },
+  { name: "Special Dog", tone: "navy" },
+  { name: "Whiskas", tone: "brand" },
 ] as const;
 
 export const services = [

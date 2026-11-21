@@ -10,8 +10,8 @@ export function HomeShell({ children }: { children: React.ReactNode }) {
     <>
       <SplashScreen onFinish={() => setEntered(true)} />
       <div
-        className={entered ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-2 opacity-0"}
-        style={{ transition: "opacity 0.5s ease, transform 0.5s ease" }}
+        className={entered ? "opacity-100" : "pointer-events-none opacity-0"}
+        style={{ transition: "opacity 0.5s ease" }}
       >
         {children}
       </div>

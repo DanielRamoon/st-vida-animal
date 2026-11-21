@@ -49,6 +49,39 @@
   }
 }
 
+@keyframes brand-marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes brand-marquee-reverse {
+  from {
+    transform: translateX(-50%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+.brand-marquee-track {
+  animation: brand-marquee 38s linear infinite;
+}
+
+.brand-marquee-track-reverse {
+  animation: brand-marquee-reverse 42s linear infinite;
+}
+
+.brand-marquee:hover .brand-marquee-track,
+.brand-marquee:hover .brand-marquee-track-reverse {
+  animation-play-state: paused;
+}
+
 @keyframes pet-run {
   0% {
     transform: translateX(0);
@@ -304,6 +337,8 @@
   .pulse-ring,
   .orbit-ring,
   .vet-glow,
+  .brand-marquee-track,
+  .brand-marquee-track-reverse,
   .service-card-3d:hover .holo-shine::before {
     animation: none;
   }

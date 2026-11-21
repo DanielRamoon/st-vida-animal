@@ -3,6 +3,7 @@ import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { ScrollToTop } from "@/components/layout/ScrollToTop";
 import { About } from "@/components/sections/About";
+import { Brands } from "@/components/sections/Brands";
 import { Contact } from "@/components/sections/Contact";
 import { Gallery } from "@/components/sections/Gallery";
 import { Hero } from "@/components/sections/Hero";
@@ -23,6 +24,7 @@ export default function Home() {
       <main>
         <Hero />
         <Services />
+        <Brands />
         <About />
         <Gallery />
         <Tips />
