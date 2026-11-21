@@ -6,19 +6,19 @@ import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 
 const panels = [
   {
-    src: "/images/galeria-banho.jpg",
+    src: "/images/galeria-banho.webp",
     alt: "Pet no banho",
     className: "left-[4%] top-[18%] w-[7.5rem] -rotate-12 sm:w-36 lg:left-[2%] lg:top-[22%]",
     depth: 18,
   },
   {
-    src: "/images/galeria-laco.jpg",
+    src: "/images/galeria-laco.webp",
     alt: "Pet feliz",
     className: "right-[3%] top-[12%] w-[6.5rem] rotate-8 sm:w-32 lg:right-[1%] lg:top-[16%]",
     depth: 24,
   },
   {
-    src: "/images/galeria-descanso.jpg",
+    src: "/images/galeria-descanso.webp",
     alt: "Gato descansando",
     className: "bottom-[22%] left-[8%] hidden w-28 -rotate-6 sm:block lg:bottom-[26%] lg:left-[6%]",
     depth: 14,
@@ -44,6 +44,8 @@ export function FloatingPetPanels() {
             alt={panel.alt}
             width={360}
             height={270}
+            sizes="9rem"
+            quality={60}
             className="aspect-[4/3] h-full w-full object-cover opacity-90"
           />
           <div className="absolute inset-0 bg-gradient-to-tr from-brand/25 via-transparent to-sun/20 mix-blend-soft-light" />

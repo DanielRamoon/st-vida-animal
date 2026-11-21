@@ -2,8 +2,10 @@
 
 import dynamic from "next/dynamic";
 import { PawPrint } from "lucide-react";
+import { useEffect, useState } from "react";
 import { FloatingPetPanels } from "@/components/cinematic/FloatingPetPanels";
 import { RunningPets } from "@/components/cinematic/RunningPets";
+import { SoftBackdrop } from "@/components/cinematic/SoftBackdrop";
 import { HeroVisual } from "@/components/sections/HeroVisual";
 import { Cta } from "@/components/ui/CtaLink";
 import { Curve } from "@/components/ui/Waves";
@@ -12,15 +14,25 @@ import { whatsappHref } from "@/lib/whatsapp";
 
 const HeroScene = dynamic(
   () => import("@/components/cinematic/HeroScene").then((mod) => mod.HeroScene),
-  { ssr: false },
+  { ssr: false, loading: () => <SoftBackdrop /> },
 );
 
 export function Hero() {
+  const [desktop, setDesktop] = useState(false);
+
+  useEffect(() => {
+    const media = window.matchMedia("(min-width: 1024px)");
+    const update = () => setDesktop(media.matches);
+    update();
+    media.addEventListener("change", update);
+    return () => media.removeEventListener("change", update);
+  }, []);
+
   return (
     <section id="inicio" className="relative overflow-hidden bg-cream">
-      <HeroScene />
-      <FloatingPetPanels />
-      <RunningPets tone="cream" className="z-[2]" />
+      {desktop ? <HeroScene /> : <SoftBackdrop />}
+      {desktop ? <FloatingPetPanels /> : null}
+      {desktop ? <RunningPets tone="cream" className="z-[2]" /> : null}
 
       <PawPrint className="float-slow absolute top-6 left-[7%] z-[2] hidden size-16 -rotate-12 text-brand/10 lg:block" aria-hidden />
       <PawPrint className="float-slow absolute top-8 right-[8%] z-[2] size-12 rotate-12 text-brand/10 sm:size-16" aria-hidden />

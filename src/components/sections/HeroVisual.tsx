@@ -51,12 +51,13 @@ export function HeroVisual() {
         }
       >
         <Image
-          src="/images/hero-pets.jpg"
+          src="/images/hero-pets.webp"
           alt="Golden retriever e gato tigrado no balcão da Vida Animal"
           width={1280}
           height={720}
           priority
-          sizes="(min-width: 1024px) 46vw, 100vw"
+          sizes="(min-width: 1024px) 46vw, 92vw"
+          quality={75}
           className="aspect-[4/3] h-auto w-full object-cover object-[center_30%] lg:-mb-16 lg:aspect-[5/4]"
         />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-brand/25 via-transparent to-white/10 mix-blend-soft-light" />

@@ -70,25 +70,25 @@ export const services = [
 
 export const gallery = [
   {
-    src: "/images/galeria-banho.jpg",
+    src: "/images/galeria-banho.webp",
     alt: "Cachorro no banho, com espuma na cabeça",
     width: 900,
     height: 675,
   },
   {
-    src: "/images/galeria-laco.jpg",
+    src: "/images/galeria-laco.webp",
     alt: "Cachorro pequeno com laço rosa",
     width: 900,
     height: 675,
   },
   {
-    src: "/images/galeria-vet.jpg",
+    src: "/images/galeria-vet.webp",
     alt: "Filhote sendo segurado com cuidado",
     width: 900,
     height: 675,
   },
   {
-    src: "/images/galeria-descanso.jpg",
+    src: "/images/galeria-descanso.webp",
     alt: "Gato descansando em uma caminha",
     width: 900,
     height: 675,

@@ -71,11 +71,12 @@ export function Header() {
         <div className="mx-auto flex h-[5.25rem] max-w-6xl items-center justify-between gap-3 px-4 sm:px-6">
           <a href="#inicio" className="shrink-0" onClick={() => goTo("#inicio")}>
             <Image
-              src="/images/logo.png"
+              src="/images/logo.webp"
               alt={site.name}
-              width={980}
-              height={403}
+              width={640}
+              height={263}
               priority
+              sizes="(min-width: 1024px) 180px, 140px"
               className="h-14 w-auto sm:h-16 lg:h-[4.6rem]"
             />
           </a>

@@ -87,6 +87,7 @@ export function Gallery() {
                   width={photo.width}
                   height={photo.height}
                   sizes="(min-width: 1024px) 22vw, 80vw"
+                  quality={70}
                   className="aspect-[4/3] w-full object-cover transition duration-500 group-hover:scale-105"
                 />
                 <span className="sr-only">Ampliar: {photo.alt}</span>

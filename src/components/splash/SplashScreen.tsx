@@ -7,8 +7,8 @@ import { useEffect, useRef, useState } from "react";
 import { site } from "@/config/site";
 
 const SESSION_KEY = "vida-animal-splash-seen";
-const AUTO_EXIT_MS = 3600;
-const REDUCED_EXIT_MS = 1800;
+const AUTO_EXIT_MS = 2200;
+const REDUCED_EXIT_MS = 900;
 
 type SplashScreenProps = {
   onFinish?: () => void;
@@ -72,11 +72,12 @@ export function SplashScreen({ onFinish }: SplashScreenProps) {
     return (
       <div className="fixed inset-0 z-[100] grid place-items-center bg-cream" aria-hidden>
         <Image
-          src="/images/logo.png"
+          src="/images/logo.webp"
           alt=""
-          width={980}
-          height={403}
+          width={640}
+          height={263}
           priority
+          sizes="16rem"
           className="h-auto w-[min(70vw,16rem)] opacity-90"
         />
       </div>
@@ -152,11 +153,12 @@ export function SplashScreen({ onFinish }: SplashScreenProps) {
                 aria-hidden
               />
               <Image
-                src="/images/logo.png"
+                src="/images/logo.webp"
                 alt={site.name}
-                width={980}
-                height={403}
+                width={640}
+                height={263}
                 priority
+                sizes="(min-width: 640px) 20rem, 78vw"
                 className="relative h-auto w-[min(78vw,18rem)] sm:w-[20rem]"
               />
             </motion.div>

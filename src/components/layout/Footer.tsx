@@ -16,7 +16,14 @@ export function Footer() {
     <footer className="bg-navy text-white">
       <Reveal direction="up" className="mx-auto grid max-w-6xl items-center gap-8 px-4 py-10 sm:px-6 lg:grid-cols-[1.1fr_auto_1fr] lg:py-12">
         <div className="flex flex-col items-center gap-4 lg:items-start">
-          <Image src="/images/logo.png" alt={site.name} width={980} height={403} className="h-16 w-auto" />
+          <Image
+            src="/images/logo.webp"
+            alt={site.name}
+            width={640}
+            height={263}
+            sizes="160px"
+            className="h-16 w-auto"
+          />
           <ul className="flex flex-wrap justify-center gap-x-4 gap-y-2 text-sm font-medium text-white/80 lg:justify-start">
             {navItems.map((item) => (
               <li key={item.href}>

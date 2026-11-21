@@ -2,8 +2,9 @@
 
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Float, MeshDistortMaterial, Sparkles } from "@react-three/drei";
-import { Suspense, useEffect, useMemo, useRef, useState } from "react";
+import { Suspense, useMemo, useRef } from "react";
 import type { Mesh } from "three";
+import { SoftBackdrop } from "@/components/cinematic/SoftBackdrop";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 
 function EnergyOrb({
@@ -77,33 +78,10 @@ function SceneContent() {
   );
 }
 
-function SoftBackdrop() {
-  return (
-    <div
-      className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_70%_35%,rgba(255,196,0,0.16),transparent_42%),radial-gradient(circle_at_20%_70%,rgba(169,0,8,0.12),transparent_40%)]"
-      aria-hidden
-    />
-  );
-}
-
 export function HeroScene() {
   const reduced = usePrefersReducedMotion();
-  const [allowWebGL, setAllowWebGL] = useState(false);
 
-  useEffect(() => {
-    const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
-    const wide = window.matchMedia("(min-width: 1024px)");
-    const update = () => setAllowWebGL(finePointer.matches && wide.matches);
-    update();
-    finePointer.addEventListener("change", update);
-    wide.addEventListener("change", update);
-    return () => {
-      finePointer.removeEventListener("change", update);
-      wide.removeEventListener("change", update);
-    };
-  }, []);
-
-  if (reduced || !allowWebGL) {
+  if (reduced) {
     return <SoftBackdrop />;
   }
 

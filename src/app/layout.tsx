@@ -21,7 +21,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: site.name,
   description: site.description,
-  icons: { icon: "/images/logo.png" },
+  icons: { icon: "/images/logo.webp" },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

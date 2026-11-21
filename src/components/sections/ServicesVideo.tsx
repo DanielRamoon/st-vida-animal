@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { SoftBackdrop } from "@/components/cinematic/SoftBackdrop";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 
 export function ServicesVideo() {
@@ -8,25 +9,37 @@ export function ServicesVideo() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [active, setActive] = useState(false);
+  const [desktop, setDesktop] = useState(false);
+  const [shouldLoad, setShouldLoad] = useState(false);
+
+  useEffect(() => {
+    const media = window.matchMedia("(min-width: 1024px)");
+    const update = () => setDesktop(media.matches);
+    update();
+    media.addEventListener("change", update);
+    return () => media.removeEventListener("change", update);
+  }, []);
 
   useEffect(() => {
     const node = sectionRef.current;
-    if (!node) return;
+    if (!node || !desktop || reduced) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        setActive(entry.isIntersecting && entry.intersectionRatio > 0.28);
+        const visible = entry.isIntersecting && entry.intersectionRatio > 0.28;
+        setActive(visible);
+        if (visible) setShouldLoad(true);
       },
       { threshold: [0.2, 0.35, 0.5] },
     );
 
     observer.observe(node);
     return () => observer.disconnect();
-  }, []);
+  }, [desktop, reduced]);
 
   useEffect(() => {
     const video = videoRef.current;
-    if (!video || reduced) return;
+    if (!video || reduced || !desktop) return;
 
     if (active) {
       const play = video.play();
@@ -34,15 +47,13 @@ export function ServicesVideo() {
     } else {
       video.pause();
     }
-  }, [active, reduced]);
+  }, [active, reduced, desktop]);
 
-  if (reduced) {
+  if (reduced || !desktop) {
     return (
-      <div
-        ref={sectionRef}
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_70%_40%,rgba(255,196,0,0.14),transparent_40%),radial-gradient(circle_at_20%_70%,rgba(169,0,8,0.08),transparent_42%)]"
-        aria-hidden
-      />
+      <div ref={sectionRef} className="pointer-events-none absolute inset-0" aria-hidden>
+        <SoftBackdrop />
+      </div>
     );
   }
 
@@ -53,11 +64,11 @@ export function ServicesVideo() {
         className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${
           active ? "opacity-100" : "opacity-0"
         }`}
-        src="/videos/dog-ball-run.mp4"
+        src={shouldLoad ? "/videos/dog-ball-run.mp4" : undefined}
         muted
         playsInline
         loop
-        preload="metadata"
+        preload="none"
       />
       <div className="absolute inset-0 bg-white/78 backdrop-blur-[1.5px]" />
       <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.55)_0%,rgba(255,255,255,0.2)_45%,rgba(255,255,255,0.7)_100%)]" />

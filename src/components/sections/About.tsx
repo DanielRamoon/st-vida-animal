@@ -17,11 +17,12 @@ export function About() {
         <div className="flex items-center justify-center px-4 py-14 sm:px-8 lg:py-20">
           <Reveal direction="left" className="relative w-full max-w-md">
             <Image
-              src="/images/about-pets.jpg"
+              src="/images/about-pets.webp"
               alt="Cachorro e gato juntos ao ar livre"
               width={1000}
               height={1000}
-              sizes="(min-width: 1024px) 28rem, 100vw"
+              sizes="(min-width: 1024px) 28rem, 90vw"
+              quality={75}
               className="aspect-square w-full rounded-full object-cover shadow-[0_22px_50px_rgba(20,37,68,0.18)] ring-8 ring-white"
             />
             <Heart className="absolute top-4 -right-1 size-12 fill-brand text-brand drop-shadow sm:top-8 sm:-right-2" aria-hidden />
