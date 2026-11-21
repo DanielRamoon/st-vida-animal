@@ -2,7 +2,7 @@
 
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Float, MeshDistortMaterial, Sparkles } from "@react-three/drei";
-import { Suspense, useMemo, useRef } from "react";
+import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import type { Mesh } from "three";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 
@@ -77,21 +77,51 @@ function SceneContent() {
   );
 }
 
+function SoftBackdrop() {
+  return (
+    <div
+      className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_70%_35%,rgba(255,196,0,0.16),transparent_42%),radial-gradient(circle_at_20%_70%,rgba(169,0,8,0.12),transparent_40%)]"
+      aria-hidden
+    />
+  );
+}
+
 export function HeroScene() {
   const reduced = usePrefersReducedMotion();
+  const [allowWebGL, setAllowWebGL] = useState(false);
 
-  if (reduced) {
-    return (
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_70%_35%,rgba(255,196,0,0.16),transparent_42%),radial-gradient(circle_at_20%_70%,rgba(169,0,8,0.12),transparent_40%)]" aria-hidden />
-    );
+  useEffect(() => {
+    const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
+    const wide = window.matchMedia("(min-width: 1024px)");
+    const update = () => setAllowWebGL(finePointer.matches && wide.matches);
+    update();
+    finePointer.addEventListener("change", update);
+    wide.addEventListener("change", update);
+    return () => {
+      finePointer.removeEventListener("change", update);
+      wide.removeEventListener("change", update);
+    };
+  }, []);
+
+  if (reduced || !allowWebGL) {
+    return <SoftBackdrop />;
   }
 
   return (
     <div className="pointer-events-none absolute inset-0 z-0 opacity-80" aria-hidden>
       <Canvas
-        dpr={[1, 1.4]}
-        gl={{ alpha: true, antialias: true, powerPreference: "high-performance" }}
+        dpr={[1, 1.25]}
+        gl={{
+          alpha: true,
+          antialias: true,
+          powerPreference: "high-performance",
+          premultipliedAlpha: true,
+        }}
+        onCreated={({ gl }) => {
+          gl.setClearColor(0x000000, 0);
+        }}
         camera={{ position: [0, 0, 5.4], fov: 42 }}
+        style={{ width: "100%", height: "100%", display: "block", background: "transparent" }}
       >
         <Suspense fallback={null}>
           <SceneContent />

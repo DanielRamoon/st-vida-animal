@@ -56,7 +56,7 @@ export function RunningPets({ className, tone = "cream" }: RunningPetsProps) {
         />
       </div>
 
-      <div className={cn("pet-dash absolute top-[24%] left-[-26%]", dim)}>
+      <div className={cn("pet-dash absolute bottom-[28%] left-[-26%] hidden sm:block", dim)}>
         <Image
           src="/images/cat-run.png"
           alt=""
